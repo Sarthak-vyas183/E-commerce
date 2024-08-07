@@ -3,90 +3,80 @@ const router = express.Router();
 
 const Product = require("../models/productModel");
 const ErrorHander = require("../HandlingError/errorHandler");
-const catchAsyncError  = require("../middleware/catchAssyncError");
+const catchAsyncError = require("../middleware/catchAssyncError"); // Ensure this path is correct
 const apiFeatures = require("../HandlingError/apiFeatures");
 
+// Create product --admin
+router.post("/createProduct", catchAsyncError(async (req, res, next) => {
+    const product = await Product.create(req.body);
+    res.status(200).json({
+        success: true,
+        product
+    });
+}));
 
-//create product --admin
-router.post("/createProduct",catchAsyncError( async (req, res) => {
-  
-        const product = await Product.create(req.body);
-        res.status(200).json({
-            success: true,
-            product
-        });
-    
-}))
-
-
-//getall product
-router.get("/getallProducts",async(req,res)=>{
-   const ApiFeatures = new apiFeatures(Product.find(), req.query).search().filter()
+// Get all products
+router.get("/getallProducts", catchAsyncError(async (req, res, next) => {
+    const resultPerPage = 5;
+    const productCount = await Product.countDocuments();
+    const ApiFeatures = new apiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
     const products = await ApiFeatures.query;
 
     res.status(200).json({
-        success:true,
-        products
-    })
-})
+        success: true,
+        products,
+        productCount
+    });
+}));
 
-
-//get Product details
-router.get("/getOneProduct/:id",async(req,res)=>{
+// Get product details
+router.get("/getOneProduct/:id", catchAsyncError(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
-
-    if(!product){
-        return res.status(500).json({
-            success:false,
-            message:"product not found"
-        })
-      }
-
-      res.status(200).json({
-        success:true,
-        product
-    })
-})
-
-//update product --admin
-router.put("/update/:id",async (req,res)=>{
-    let product = await Product.findById(req.params.id);
-
-
-    if(!product){
-        return next(new ErrorHander("not updated product",404))
+    if (!product) {
+        return next(new ErrorHander("Product not found", 404));
     }
-     product = await Product.findByIdAndUpdate(req.params.id,req.body,{
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
-     })
 
-     res.status(200).json({
-        success:true,
+    res.status(200).json({
+        success: true,
         product
-     })
-})
+    });
+}));
 
+// Update product --admin
+router.put("/update/:id", catchAsyncError(async (req, res, next) => {
+    let product = await Product.findById(req.params.id);
 
-//delete product
-router.delete("/deleteProduct/:id",async (req,res)=>{
-      const product = await Product.findById(req.params.id);
+    if (!product) {
+        return next(new ErrorHander("Product not found", 404));
+    }
 
-      if(!product){
-        return res.status(500).json({
-            success:false,
-            message:"product not found"
-        })
-      }
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+
+    res.status(200).json({
+        success: true,
+        product
+    });
+}));
+
+// Delete product
+router.delete("/deleteProduct/:id", catchAsyncError(async (req, res, next) => {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+        return next(new ErrorHander("Product not found", 404));
+    }
 
     await product.deleteOne();
 
     res.status(200).json({
-        success:true,
-        message:"product deleted"
-    })
-})
+        success: true,
+        message: "Product deleted"
+    });
+}));
 
 module.exports = router;
