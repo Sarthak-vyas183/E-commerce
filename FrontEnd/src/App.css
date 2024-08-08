@@ -32,7 +32,7 @@
     transition: 1s;
 }
 
-@media(max-width: 768px) {
+/* @media(max-width: 768px) {
     #NavLinks {
         display: none;
     } 
@@ -79,5 +79,71 @@
     }
     #searchIcon {
         display: flex;
+    } 
+
+
+   
+} */
+
+@media (max-width: 768px) {
+    #NavLinks {
+      display: none;
     }
-}
+  
+    #search {
+      display: none;
+    }
+  
+    #Nav {
+      height: 8vh;
+    }
+  
+    #logo {
+      width: 100%;
+    }
+  
+    #NavLeft {
+      width: 30%;
+    }
+  
+    #NavRight {
+      width: 70%;
+    }
+  
+    #userCredentail {
+      justify-content: end;
+      padding-right: 20px;
+      width: 100%;
+    }
+  
+    #profileIcon {
+      display: none;
+    }
+  
+    #userCredentail p {
+      margin-right: 10px;
+      font-size: 5px;
+    }
+  
+    #logo img {
+      display: none;
+    }
+  
+    #logo p {
+      display: flex;
+      cursor: pointer;
+    }
+  
+    #logo p i {
+      font-size: 30px;
+    }
+  
+    #userCredentail span {
+      display: none;
+    }
+  
+    #searchIcon {
+      display: flex;
+    }
+  }
+  
