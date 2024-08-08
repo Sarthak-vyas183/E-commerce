@@ -3,6 +3,7 @@ const router = express.Router();
 const ErrorHander = require("../HandlingError/errorHandler");
 const catchAsyncError = require("../middleware/catchAssyncError");
 const UserModel = require("../models/userModels");
+const sendToken = require("../HandlingError/jwtToken");
 
 //Register USer
 router.post("/Register",catchAsyncError(async(req,res)=>{
@@ -16,12 +17,34 @@ router.post("/Register",catchAsyncError(async(req,res)=>{
         }
      });
 
-     res.status(201).json({
-        success:true,
-        user
-    
-     })
+     sendToken(user,201,res);                //from jwtToken file
+
 }))
+
+
+
+//Login user
+router.post("/Login",async(req,res,next)=>{
+    const {email,password} = req.body;
+
+    //if user has given password and email both check
+
+    if(!email || !password){
+        return next(new ErrorHander("please Enter Email and Password",400))
+    }
+    const user = await UserModel.findOne({email}).select("+password")
+
+    if(!user){
+        return next(new ErrorHander("Invalid email or password",401))
+    }
+
+    const isPasswordMAtched = user.comparePassword(password);
+    if(!isPasswordMAtched){
+        return next(new ErrorHander("Invalid email or password",401))
+    }
+
+   sendToken(user,200,res);                         //jwtToken file
+})
 
 
 
