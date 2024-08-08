@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRef } from "react";
+import "../../../public/Stylesheets/home.css"
+import { gsap } from "gsap"; 
 
-function Home() {
+function Home() { 
+  const discountRef = useRef(null);
+
+   useEffect(()=> {
+        gsap.from(discountRef.current , {
+           opacity : 0,
+           scale : 0,
+           duration : 0.8,
+           
+        })
+   },[])
+
   return (
-    <div className='relative top-[10vh]'>
-      <h1>Home page goes here</h1>
-    </div>
+    <section ref={discountRef} id='home-main'  className='relative top-[11vh] w-[100vw] min-h-[89vh]  z-1 overflow-x-hidden '>
+         <div className='w-full h-auto'>
+          <img src="../../../TempImg/discount.png" alt="" />
+         </div>
+
+         <div id='banner-02' className='flex justify-center'>
+           <img className='w-full' src="../../../TempImg/discountBanner.png" alt="" />
+         </div> 
+
+         <div></div>
+         <div></div>
+    </section>
   )
 }
 

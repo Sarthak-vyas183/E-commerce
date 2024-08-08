@@ -24,8 +24,8 @@ function Nav() {
             id="logo"
             className="h-full w-[20%] flex justify-evenly items-center"
           >
-            <img className="w-28 h-10" src={Logo} alt="Logo" />
-            <p onClick={openSidebar}>
+            <img  className="w-28 h-10" src={Logo} alt="Logo" />
+            <p className="hidden" onClick={openSidebar}>
               <i className="ri-menu-2-line"></i>
             </p>
             <p className="hidden">Zyntra</p>
@@ -114,7 +114,7 @@ function Nav() {
             <i className="ri-close-line text-2xl"></i>
           </button>
         </div>
-        
+
         <ul className="p-4">
           <li className="py-2">
             <Link to="shop/men" onClick={closeSidebar}>MEN</Link>

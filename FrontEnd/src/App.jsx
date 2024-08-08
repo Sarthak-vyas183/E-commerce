@@ -4,7 +4,7 @@ import Router from './Router/Router'
 import './App.css'
 function App() {
   return (
-    <div className='w-[100vw] h-[100vh] m-0 p-0'>
+    <div className='w-[100vw] h-[100vh] m-0 p-0 overflow-x-hidden'>
          <Nav/>
          <Router/>
     </div>
