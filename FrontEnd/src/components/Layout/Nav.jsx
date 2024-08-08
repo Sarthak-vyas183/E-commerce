@@ -20,8 +20,8 @@ function Nav() {
           <li><Link to="shop/men">MEN</Link> <p></p></li>
           <li><Link to="shop/women">WOMEN</Link><p></p></li>
           <li><Link to="shop/kids">KIDS</Link><p></p></li>
-          <li><Link to="shop/home-living">HOME&Living</Link><p></p></li>
-          <li><Link to="personal-care">Beauty</Link><p></p></li>
+          <li><Link to="shop/home-living">HOME&LIVING</Link><p></p></li>
+          <li><Link to="personal-care">BEAUTY</Link><p></p></li>
         </span>
       </div>
 
