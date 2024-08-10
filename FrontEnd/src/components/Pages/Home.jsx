@@ -46,11 +46,11 @@ function Home() {
   return (
     <section id='home-main' className='relative top-[11vh] w-[100vw] min-h-[89vh] z-1 overflow-x-hidden'> 
       <div className='relative w-full h-[70vh]'>
-        <div id='banner-02' ref={bannerRef} className='flex transition-transform duration-500 ease-in-out'>
+        <div id='banner-02' ref={bannerRef} className='flex transition-transform duration-500 ease-in-out pt-2'>
           <img className='w-full h-full object-cover' src='https://richborn.s3.ap-south-1.amazonaws.com/banner2.jpg' alt='Discount Banner 1' />
           <img className='w-full h-full object-cover' src='https://richborn.s3.ap-south-1.amazonaws.com/banner%203%20part%20b.jpg' alt='Discount Banner 2' />
           <img className='w-full h-full object-cover' src='https://richborn.s3.ap-south-1.amazonaws.com/richborn-banner-bag.jpg' alt='Discount Banner 3' />
-          <img className='w-full h-full object-cover' src='https://richborn.s3.ap-south-1.amazonaws.com/richborn-banner-bag.jpg' alt='Discount Banner 4' />
+          <img className='w-full h-full object-cover' src='https://richborn.s3.ap-south-1.amazonaws.com/4th%20banner%20copy.jpg' alt='Discount Banner 4' />
         </div>
         <button 
           className='absolute top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-2'
