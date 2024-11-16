@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
 import Logo from "../../../public/images/Logo.png";
 import search from "../../../public/images/search-line.png";
@@ -117,6 +118,9 @@ function Nav() {
 
         <ul className="p-4">
           <li className="py-2">
+            <Link to="/" onClick={closeSidebar}>Home</Link>
+          </li>
+          <li className="py-2">
             <Link to="shop/men" onClick={closeSidebar}>MEN</Link>
           </li>
           <li className="py-2">
@@ -132,7 +136,7 @@ function Nav() {
             <Link to="personal-care" onClick={closeSidebar}>BEAUTY</Link>
           </li>
         </ul>
-      </div>
+      </div> 
     </>
   );
 }
