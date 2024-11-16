@@ -3,11 +3,11 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className='w-full h-[75vh] bg-[#FAFBFC] flex flex-col justify-between p-10 py-20'>
-      <div className='flex justify-between'>
-        <div>
+    <div className='w-full h-auto bg-[#FAFBFC] flex flex-col justify-between p-5 md:p-10'>
+      <div className='flex flex-col md:flex-row justify-between'>
+        <div className='mb-5 md:mb-0'>
           <h3 className='font-bold'>ONLINE SHOPPING</h3>
-          <ul>
+          <ul className='list-disc pl-5'>
             <li>Men</li>
             <li>Women</li>
             <li>Kids</li>
@@ -17,9 +17,9 @@ function Footer() {
             <li>Myntra Insider</li>
           </ul>
         </div>
-        <div>
+        <div className='mb-5 md:mb-0'>
           <h3 className='font-bold'>CUSTOMER POLICIES</h3>
-          <ul>
+          <ul className='list-disc pl-5'>
             <li>Contact Us</li>
             <li>FAQ</li>
             <li>T&C</li>
@@ -32,9 +32,9 @@ function Footer() {
             <li>Grievance Officer</li>
           </ul>
         </div>
-        <div>
+        <div className='mb-5 md:mb-0'>
           <h3 className='font-bold'>USEFUL LINKS</h3>
-          <ul>
+          <ul className='list-disc pl-5'>
             <li>Blog</li>
             <li>Careers</li>
             <li>Site Map</li>
@@ -50,19 +50,19 @@ function Footer() {
             <button className='bg-black text-white p-2 rounded'>Download on the App Store</button>
           </div>
         </div>
-      </div> 
+      </div>
 
-      <div className='flex justify-between items-center mt-10'>
-        <div className='flex flex-col'>
+      <div className='flex flex-col md:flex-row justify-between items-center mt-10'>
+        <div className='flex flex-col mb-5 md:mb-0'>
           <span className='font-bold'>100% ORIGINAL</span>
           <span>guarantee for all products at myntra.com</span>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col mb-5 md:mb-0'>
           <span className='font-bold'>Return within 14 days</span>
           <span>of receiving your order</span>
         </div>
-      </div> 
-      
+      </div>
+
       <div className='flex justify-center mt-5'>
         <div className='flex space-x-4'>
           <a href='#' className='text-gray-600'>Facebook</a>

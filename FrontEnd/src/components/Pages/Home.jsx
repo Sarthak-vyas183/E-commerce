@@ -69,7 +69,7 @@ function Home() {
   return (
     <section
       id="home-main"
-      className="relative top-[11vh] w-[100vw] min-h-[89vh] z-1 overflow-x-hidden"
+      className="relative top-[11vh] w-full min-h-[89vh] z-1 overflow-x-hidden"
     >
       {/* Banner Section */}
       <div className="relative w-full h-[70vh] max-sm:h-auto">
@@ -100,13 +100,13 @@ function Home() {
           />
         </div>
         <button
-          className="absolute max-sm:top-[7vh] top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-2 max-sm:p-[2px]"
+          className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-2 max-sm:p-[2px]"
           onClick={() => scrollBanner("left")}
         >
           &#8249;
         </button>
         <button
-          className="absolute max-sm:top-[7vh] top-1/2 right-0 transform -translate-y-1/2 bg-black text-white p-2 max-sm:p-[2px]"
+          className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black text-white p-2 max-sm:p-[2px]"
           onClick={() => scrollBanner("right")}
         >
           &#8250;
@@ -115,12 +115,12 @@ function Home() {
 
       {/* Product Section */}
       <div className="w-full min-h-[100vh] bg-[#EEE2CB]">
-        <img src={CategoryBanner} alt="Category Banner" />
-        <div className="boxes flex flex-wrap justify-evenly">
+        <img src={CategoryBanner} alt="Category Banner" className="w-full" />
+        <div className="boxes flex flex-wrap justify-center md:justify-evenly">
           {ProductLink.map((product, index) => (
             <span
               key={index}
-              className="w-[200px] h-[276px] bg-white rounded-md p-2 m-2 shadow-md flex flex-col items-center"
+              className="w-[150px] h-[276px] bg-white rounded-md p-2 m-2 shadow-md flex flex-col items-center"
             >
               <img
                 className="w-full h-[200px] object-contain"
@@ -130,15 +130,19 @@ function Home() {
               <p className="text-center text-sm font-medium mt-2">
                 {product.category}
               </p>
-              <p>{ Math.floor(Math.random()*70) +'% off'}</p>
+              <p>{Math.floor(Math.random() * 70) + '% off'}</p>
             </span>
           ))}
         </div>
       </div>
 
-     {/* Pramotion section */} 
+      {/* Promotion Section */}
       <div className="w-full h-auto">
-       <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2024/11/14/0221b3c1-8b25-4e0d-8f2b-d16e24ea5a651731585627151-App-Install-Banner.jpg" alt="" />
+        <img
+          src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2024/11/14/0221b3c1-8b25-4e0d-8f2b-d16e24ea5a651731585627151-App-Install-Banner.jpg"
+          alt=""
+          className="w-full"
+        />
       </div>
     </section>
   );

@@ -25,11 +25,11 @@ function Nav() {
             id="logo"
             className="h-full w-[20%] flex justify-evenly items-center"
           >
-            <img  className="w-28 h-10" src={Logo} alt="Logo" />
+            <Link to="/"> <img  className="w-28 h-10" src={Logo} alt="Logo" /></Link>
             <p className="hidden" onClick={openSidebar}>
               <i className="ri-menu-2-line"></i>
             </p>
-            <p className="hidden">Zyntra</p>
+            <p className="hidden">Myntra</p>
           </span>
 
           <span
@@ -98,7 +98,7 @@ function Nav() {
             <p>
               <i className="ri-shopping-bag-4-fill text-2xl"></i>
               <br />
-              <span>Bag</span>
+              <Link to="/shop/cart">Bag</Link>
             </p>
           </div>
         </div>

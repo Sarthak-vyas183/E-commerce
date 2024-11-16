@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from 'axios';
 
-function Men() {
+function HomeLives() {
   const [ProductLink, setProductLink] = useState([]);
 
   const getAllCategoryProducts = () => {
     axios
-      .get("https://fakestoreapi.com/products/category/men's clothing")
+      .get("https://fakestoreapi.com/products/category/jewelery")
       .then((res) => {
         console.log(res.data); // Logging the API response
         setProductLink(res.data); // Correctly setting the fetched products
@@ -71,4 +71,4 @@ function Men() {
   );
 }
 
-export default Men;
+export default HomeLives;
