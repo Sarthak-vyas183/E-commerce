@@ -1,0 +1,8 @@
+@media (max-width: 768px) { 
+    #home-main {
+        position: relative;
+        top: 8vh;
+        min-height: 92vh;
+    } 
+   
+}

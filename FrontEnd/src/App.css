@@ -1,0 +1,96 @@
+.Nav li {
+    display: flex;
+    text-decoration: none;
+}
+
+.userCredentail i {
+    width: 40px;
+    height: 40px;
+    font-weight: lighter;
+}
+
+.userCredentail p {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.navigation p {
+    width: 100%;
+    height: 3px;
+}
+
+.navigation li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 60%;
+    justify-content: space-between;
+}
+
+.navigation li:hover p {
+    background-color: #FF3F6C; /* Change this to the desired color */
+    transition: 1s;
+}
+
+@media (max-width: 768px) {
+    #NavLinks {
+      display: none;
+    }
+  
+    #search {
+      display: none;
+    }
+  
+    #Nav {
+      height: 8vh;
+    }
+  
+    #logo {
+      width: 100%;
+    }
+  
+    #NavLeft {
+      width: 30%;
+    }
+  
+    #NavRight {
+      width: 70%;
+    }
+  
+    #userCredentail {
+      justify-content: end;
+      padding-right: 20px;
+      width: 100%;
+    }
+  
+    #profileIcon {
+      display: none;
+    }
+  
+    #userCredentail p {
+      margin-right: 10px;
+      font-size: 5px;
+    }
+  
+    #logo img {
+      display: none;
+    }
+  
+    #logo p {
+      display: flex;
+      cursor: pointer;
+    }
+  
+    #logo p i {
+      font-size: 30px;
+    }
+  
+    #userCredentail span {
+      display: none;
+    }
+  
+    #searchIcon {
+      display: flex;
+    }
+  }
+  
