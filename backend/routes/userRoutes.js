@@ -9,9 +9,11 @@ import {
   deleteUserById,
   getUserById,
   updateUserById,
+  updateAvatar
 } from "../controllers/userController.js";
 
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
+import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
@@ -26,7 +28,8 @@ router.post("/logout", logoutCurrentUser);
 router
   .route("/profile")
   .get(authenticate, getCurrentUserProfile)
-  .put(authenticate, updateCurrentUserProfile);
+  .put(authenticate, updateCurrentUserProfile)
+  .post(authenticate, upload.single("avatar"), updateAvatar);
 
 // ADMIN ROUTES 👇
 router

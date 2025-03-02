@@ -2,6 +2,7 @@ import User from "../models/userModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createToken.js";
+import uploadOnCloudinary from "../utils/Cloudinary.js";
 
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -166,6 +167,35 @@ const updateUserById = asyncHandler(async (req, res) => {
   }
 });
 
+ const updateAvatar = asyncHandler(async (req, res) => {
+  try {
+    //uplading file from local to clodinary and get URL
+    const AvatarLocalPath = req.file?.path;
+    if (!AvatarLocalPath) throw error(401, "Avatar file missing");
+    const avatar = await uploadOnCloudinary(AvatarLocalPath);
+    if (!avatar.url)
+      throw error(401, "Error while uploading Avatar on cludinary");
+    // update URL on database
+    // geting loggedin userdata through req.user
+    const user = await userModel
+      .findByIdAndUpdate(
+        req.user?._id,
+        {
+          $set: {
+            avatar: avatar.url,
+          }, 
+        },
+        { new: true }
+      )
+      .select("-password -refreshToken");
+    if (!user) throw error(501, "avatar updation in database failed !");
+    res
+      .status(200)
+      .json({msg : "Avatar updated successfully", user: user});
+  } catch (error) {
+    throw error(500, `Internal server error : ${error}`);
+  }
+ }) 
 export {
   createUser,
   loginUser,
@@ -176,4 +206,5 @@ export {
   deleteUserById,
   getUserById,
   updateUserById,
+  updateAvatar
 };
