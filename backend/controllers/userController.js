@@ -171,13 +171,13 @@ const updateUserById = asyncHandler(async (req, res) => {
   try {
     //uplading file from local to clodinary and get URL
     const AvatarLocalPath = req.file?.path;
-    if (!AvatarLocalPath) throw error(401, "Avatar file missing");
+    if (!AvatarLocalPath) throw new Error("Avatar file missing");
     const avatar = await uploadOnCloudinary(AvatarLocalPath);
     if (!avatar.url)
-      throw error(401, "Error while uploading Avatar on cludinary");
+      throw new Error("Error while uploading Avatar on cludinary");
     // update URL on database
     // geting loggedin userdata through req.user
-    const user = await userModel
+    const user = await User
       .findByIdAndUpdate(
         req.user?._id,
         {
@@ -188,12 +188,12 @@ const updateUserById = asyncHandler(async (req, res) => {
         { new: true }
       )
       .select("-password -refreshToken");
-    if (!user) throw error(501, "avatar updation in database failed !");
+    if (!user) throw new Error("avatar updation in database failed !");
     res
       .status(200)
       .json({msg : "Avatar updated successfully", user: user});
   } catch (error) {
-    throw error(500, `Internal server error : ${error}`);
+    throw new Error(`Internal server error : ${error}`);
   }
  }) 
 export {
