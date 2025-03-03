@@ -1,10 +1,11 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
+import uploadOnCloudinary from "../utils/Cloudinary.js";
 
 const addProduct = asyncHandler(async (req, res) => {
-  try {
-    const { name, description, price, category, quantity, brand } = req.fields;
-
+  try { 
+    const { name, description, price, category, quantity, brand } = req.body;
+     
     // Validation
     switch (true) {
       case !name:
@@ -19,11 +20,23 @@ const addProduct = asyncHandler(async (req, res) => {
         return res.json({ error: "Category is required" });
       case !quantity:
         return res.json({ error: "Quantity is required" });
-    }
+    } 
 
-    const product = new Product({ ...req.fields });
-    await product.save();
-    res.json(product);
+    const productImgLocalPath = req.file?.path;
+    if(!productImgLocalPath) return res.json({ error: "Image is required" });
+    const productImg = await uploadOnCloudinary(productImgLocalPath);
+    if(!productImg.url) return res.json({ error: "Image upload failed" });
+    
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      category,
+      quantity,
+      brand,
+      image: productImg.url,
+    });
+    res.status(200).json({msg : "ok product created", product});
   } catch (error) {
     console.error(error);
     res.status(400).json(error.message);
