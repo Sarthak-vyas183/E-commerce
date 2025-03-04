@@ -3,30 +3,23 @@ import Product from "../models/productModel.js";
 import uploadOnCloudinary from "../utils/Cloudinary.js";
 
 const addProduct = asyncHandler(async (req, res) => {
-  try { 
+  try {
     const { name, description, price, category, quantity, brand } = req.body;
-     
+
     // Validation
-    switch (true) {
-      case !name:
-        return res.json({ error: "Name is required" });
-      case !brand:
-        return res.json({ error: "Brand is required" });
-      case !description:
-        return res.json({ error: "Description is required" });
-      case !price:
-        return res.json({ error: "Price is required" });
-      case !category:
-        return res.json({ error: "Category is required" });
-      case !quantity:
-        return res.json({ error: "Quantity is required" });
-    } 
+    if (!name) return res.status(400).json({ error: "Name is required" });
+    if (!brand) return res.status(400).json({ error: "Brand is required" });
+    if (!description) return res.status(400).json({ error: "Description is required" });
+    if (!price) return res.status(400).json({ error: "Price is required" });
+    if (!category) return res.status(400).json({ error: "Category is required" });
+    if (!quantity) return res.status(400).json({ error: "Quantity is required" });
 
     const productImgLocalPath = req.file?.path;
-    if(!productImgLocalPath) return res.json({ error: "Image is required" });
+    if (!productImgLocalPath) return res.status(400).json({ error: "Image is required" });
+
     const productImg = await uploadOnCloudinary(productImgLocalPath);
-    if(!productImg.url) return res.json({ error: "Image upload failed" });
-    
+    if (!productImg.url) return res.status(400).json({ error: "Image upload failed" });
+
     const product = await Product.create({
       name,
       description,
@@ -36,10 +29,11 @@ const addProduct = asyncHandler(async (req, res) => {
       brand,
       image: productImg.url,
     });
-    res.status(200).json({msg : "ok product created", product});
+
+    res.status(201).json({ msg: "Product created successfully", product });
   } catch (error) {
     console.error(error);
-    res.status(400).json(error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -91,6 +85,7 @@ const removeProduct = asyncHandler(async (req, res) => {
 const fetchProducts = asyncHandler(async (req, res) => {
   try {
     const pageSize = 6;
+    const page = Number(req.query.page) || 1;
 
     const keyword = req.query.keyword
       ? {
@@ -102,13 +97,15 @@ const fetchProducts = asyncHandler(async (req, res) => {
       : {};
 
     const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ ...keyword }).limit(pageSize);
+    const products = await Product.find({ ...keyword })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
 
     res.json({
       products,
-      page: 1,
+      page,
       pages: Math.ceil(count / pageSize),
-      hasMore: false,
+      hasMore: page < Math.ceil(count / pageSize),
     });
   } catch (error) {
     console.error(error);
